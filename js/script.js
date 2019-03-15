@@ -3,14 +3,16 @@
 //****************** SERIOUSLY TEST USING console.log()!!! ******************
 /* global $ */
 
-var giphy = "https://media3.giphy.com/media/Y4pAQv58ETJgRwoLxj/200_s.gif?cid=e1bb72ff5c817f5d33796c6e6bdfdfc6";
-
 $("#search-button").click(function(){
+var input = $("#search-term").val();
+var giphy = "https://api.giphy.com/v1/gifs/search?q=" + input + "&rating=pg&api_key=dc6zaTOxFJmzC";
+
   $.ajax({
         url: giphy,
         method: "GET",
         success: function(response) {
-        alert(response);
+        var giph = response.data[0].images.original.url;
+        $(".text-center").html('<img src="' + giph + '">');
         }
   });
 });
